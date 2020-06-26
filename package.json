@@ -1,0 +1,49 @@
+{
+  "name": "slider",
+  "version": "1.0.0",
+  "main": "dist/Slider.cjs.js",
+  "module": "dist/Slider.esm.js",
+  "browser": "dist/Slider.umd.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jestrux/Slider"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.3",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "7.10.3",
+    "@testing-library/dom": "^7.18.1",
+    "@testing-library/jest-dom": "^5.11.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "24.9.0",
+    "concurrently": "4.1.2",
+    "jest": "26.1.0",
+    "rollup": "1.32.1",
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-postcss": "^3.1.2",
+    "serve": "11.3.2"
+  },
+  "scripts": {
+    "prepare": "yarn build",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "watch": "concurrently 'yarn build:watch' 'yarn serve -l tcp://127.0.0.1'",
+    "test": "jest"
+  },
+  "renovate": {
+    "extends": [
+      "config:js-lib"
+    ],
+    "automerge": true,
+    "major": {
+      "automerge": false
+    },
+    "automergeType": "branch"
+  },
+  "files": [
+    "dist"
+  ]
+}

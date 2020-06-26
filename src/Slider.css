@@ -1,0 +1,106 @@
+.Slider{
+    position: relative;
+}
+
+.Slider .SlideContainer{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Slider .SlideScroller{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    transition: transform 0.3s ease-out 0.06s;
+}
+
+.Slider .SlideItem{
+    width: 100%;
+    min-width: 100%;
+    margin: auto;
+    transition: opacity 0.5s ease-out 0.15s, transform 0.2s ease-out 0.15s;
+}
+
+.Slider .SlideItem:not(.current){
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+}
+
+.Slider .SlideMovers {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -45px;
+    right: -45px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Slider .SlideMovers button{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background:transparent;
+    outline: none;
+    cursor: pointer;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
+}
+
+.Slider .SlideMovers button:hover{
+    transform: scale(1.2);
+}
+
+.Slider .SlideMovers button.disabled {
+    box-shadow: none;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.Slider .SlideMovers button svg{
+	width: 40px;
+	height: 40px;
+	fill: #7f5f2c;
+}
+
+.Slider .SlideMarkers {
+    pointer-events: none;
+    display: flex;
+    width: 100%;
+    z-index: 3;
+    position: relative;
+    margin-top: 2em;
+    justify-content: center;
+}
+
+.Slider .SlideMarkers button{
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin: 0 8px;
+    padding: 0;
+    background-color: transparent;
+    border: 2px solid #170E32;
+    /* border: 1px solid #170E32; */
+    opacity: 0.5;
+    transition: opacity 0.35s ease-out;
+    outline: none;
+    align-items: center;
+    opacity: 0.4 !important;
+}
+
+.Slider .SlideMarkers button {
+    opacity: 1;
+}
+
+.Slider .SlideMarkers button.active{
+    background: #170E32;
+    opacity: 1;
+}

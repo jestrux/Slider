@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Demo</title>
+    <link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="../dist/Slider.css" />
+
+    <style>
+        #slideshowContent{
+            position: relative;
+            z-index: 1;
+            padding-left: 9rem;
+            max-width: 490px;
+        }
+
+        #slideshowContent small{
+            font-weight: 100;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        #slideshowContent .Slider .SlideMovers {
+            left: -80px;
+            right: -80px;
+        }
+
+        #slideshowContent .Slider .SlideMovers button.disabled{
+            opacity: 0;
+        }
+
+        #slideshowContent .slide-item{
+            position: relative;
+        }
+
+        #slideshowContent .slide-item > *{
+            position: relative;
+            z-index: 1;
+        }
+
+        #slideshowContent:before{
+            content: attr(data-first-letter);
+            position: absolute;
+            top: -6rem;
+            left: -3rem;
+            font-family: Roboto, sans-serif;
+            font-size: 25rem;
+            font-weight: 500;
+            opacity: 0.032;
+        }
+
+        #slideshowContent.animate-letter-change:before{
+            animation: animateLetterChange 0.4s ease-out;
+        }
+
+        @keyframes animateLetterChange{
+            from{
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to{
+                opacity: 0.032;
+                transform: scale(1);
+            }
+        }
+
+        #slideshowContent h3{
+            margin: 1rem 0;
+            font-size: 1.7rem;
+        }
+
+        #slideshowContent p{
+            font-size: 0.92rem;
+            line-height: 1.7em;
+        }
+
+        .SlideshowProgress{
+            width: 100%;
+            max-width: 340px;
+            height: 4px;
+            background:#7f5f2c;
+            margin-top: 2rem;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .SlideshowProgress > div{
+            background: #fff;
+            background: #fdf7b1;
+            right: 100%;
+        }
+
+        /* QUOTES and Partners */
+        #partnersClients{
+            padding: 5rem 0;
+            background-size: 150px;
+            background-position: center;
+            position: relative;
+        }
+
+        #quotes{
+            margin-bottom: 5rem;
+            background: #FFBE58;
+        }
+
+        #quoteIcon{
+            flex-shrink: 0;
+            background: #170E32;
+            width: 80px;
+        }
+
+        #quotes{
+            width: 100vw;
+            max-width: 620px;
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+
+        #quotes .SlideshowProgress{
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 180px;
+            height: 2px;
+        }
+
+        #quotes p{
+            font-family: Roboto, sans-serif;
+            font-size: 1.2rem !important;
+            line-height: 1.6em !important;
+        }
+
+        #quotes h6{
+            margin-top: 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="quotes">
+        <div id="quoteList">
+            <div>
+                <p>
+                    Gender equality is more than a goal in itself. It is a precondition for meeting the
+                    challenge of reducing poverty, promoting sustainable development and
+                    building good governance.
+                </p>
+                <h6>
+                    Hon. Kofi Annan
+                </h6>
+            </div>
+    
+            <div>
+                <p>
+                    Absol tsdfa more than a goal in itself. It is a precondition for meeting the
+                    challenge of reducing poverty, promoting sustainable development and
+                    building good governance.
+                </p>
+                <h6>
+                    Ms. Anna Henga
+                </h6>
+            </div>
+    
+            <div>
+                <p>
+                    Building good governance gender equality is more than a goal in itself. It is a precondition for meeting
+                    the
+                    challenge of reducing poverty, promoting sustainable development and.
+                </p>
+                <h6>
+                    Mwl. Julius K. Nyerere
+                </h6>
+            </div>
+            <div>
+                <p>
+                    Gender equality is more than a goal in itself. It is a precondition for meeting the
+                    challenge of reducing poverty, promoting sustainable development and
+                    building good governance.
+                </p>
+                <h6>
+                    Hon. Kofi Annan
+                </h6>
+            </div>
+    
+            <div>
+                <p>
+                    Absol tsdfa more than a goal in itself. It is a precondition for meeting the
+                    challenge of reducing poverty, promoting sustainable development and
+                    building good governance.
+                </p>
+                <h6>
+                    Ms. Anna Henga
+                </h6>
+            </div>
+        </div>
+    
+        <div class="layout center-justified">
+            <div class="SlideshowProgress" class="position-relative">
+                <div class="position-absolute pin-all"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/Slider.umd.js"></script>
+    <script>
+        const quotesSlideshowProgress = document.querySelector("#quotes .SlideshowProgress > div");
+        const quoteCount = document.querySelector("#quoteList").children.length - 1;
+        new Slider("#quoteList", {
+            onChange: (newIndex, newPercent) => {
+                quotesSlideshowProgress.style.right = (100 - newPercent) + "%";
+            }
+        });
+    </script> 
+</body>
+</html>
