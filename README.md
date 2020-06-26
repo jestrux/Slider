@@ -9,9 +9,9 @@ const slider = new Slider("#slideshowContainer");
 
 // if you want it to play automatically add
 slider.play();
+```
 
 See sample code [here](demo/index.html)
-```
 
 ## Developer environment requirements
 
