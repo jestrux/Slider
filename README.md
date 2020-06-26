@@ -1,9 +1,6 @@
-# 📚 Slider
+# Slider
 
 > Simple way to make Slides and slideshows on the web.
-
-## Demo
-[See demo here](demo/index.html)
 
 ## Simple Usage
 
@@ -12,6 +9,8 @@ const slider = new Slider("#slideshowContainer");
 
 // if you want it to play automatically add
 slider.play();
+
+See sample code [here](demo/index.html)
 ```
 
 ## Developer environment requirements
