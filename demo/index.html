@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../dist/Slider.css" />
 
     <style>
+        body{
+            padding: 3rem 0;
+        }
         #slideshowContent{
             position: relative;
             z-index: 1;
@@ -91,14 +94,6 @@
             right: 100%;
         }
 
-        /* QUOTES and Partners */
-        #partnersClients{
-            padding: 5rem 0;
-            background-size: 150px;
-            background-position: center;
-            position: relative;
-        }
-
         #quotes{
             margin-bottom: 5rem;
             background: #FFBE58;
@@ -115,6 +110,7 @@
             max-width: 620px;
             padding: 2rem 3rem;
             text-align: center;
+            margin: auto;
         }
 
         #quotes .SlideshowProgress{
@@ -135,9 +131,69 @@
             font-weight: 600;
             font-size: 1rem;
         }
+
+        #slideshowContainer{
+            margin: auto;
+            margin-bottom: 2rem;
+            width: 500px;
+        }
+
+        #slideshowContainer .SlideMovers{
+            left: 10px;
+            right: 10px;
+        }
+
+        #slideshowContainer .SlideMovers button{
+            width: 35px;
+            height: 35px;
+        }
+
+        #slideshowContainer .SlideMovers button svg{
+            width: 28px;
+            height: 28px;
+        }
+
+        #slideshowContainer .SlideMovers button:not(.disabled){
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        #slideshowContainer:hover .SlideMovers button:not(.disabled){
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        #slideshow div{
+            position: relative;
+            height: 400px;
+        }
+
+        #slideshow img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
+    <div id="slideshowContainer">
+        <div id="slideshow">
+            <div>
+                <img src="https://images.unsplash.com/photo-1593642634524-b40b5baae6bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2MTY1fQ" alt="">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1587717468251-4c747c3b1fe6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2MTY1fQ" alt="">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1593854893624-b7d6b1cd1a85?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2MTY1fQ" alt="">
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1593853919383-37c43e748897?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE2MTY1fQ" alt="">
+            </div>
+        </div>
+    </div>
+
     <div id="quotes">
         <div id="quoteList">
             <div>
@@ -206,6 +262,11 @@
     <script>
         const quotesSlideshowProgress = document.querySelector("#quotes .SlideshowProgress > div");
         const quoteCount = document.querySelector("#quoteList").children.length - 1;
+        new Slider("#slideshow", {
+            cycle: true,
+            showActionsOnHover: true,
+        }).play(2000);
+
         new Slider("#quoteList", {
             onChange: (newIndex, newPercent) => {
                 quotesSlideshowProgress.style.right = (100 - newPercent) + "%";

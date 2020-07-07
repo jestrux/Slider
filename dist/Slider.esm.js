@@ -33,7 +33,7 @@ function Slider(containerId, options) {
 }
 
 function setupSlider(container) {
-  Array.from(container.children).forEach(node => node.classList.add("SlideItem"))
+  Array.from(container.children).forEach(node => node.classList.add("SlideItem"));
 
   const SliderContent = document.createElement("div");
   SliderContent.classList.add("Slider");
@@ -62,7 +62,7 @@ Slider.prototype.scrollSliderBack = function () {
   this.updateUI();
   if(this.slideshowTimer)
     this.play();
-}
+};
 
 Slider.prototype.scrollSliderForward = function (fromAutoPlay) {
   if(this.currentIndex < this.SlideItems.length - 1)
@@ -80,7 +80,7 @@ Slider.prototype.scrollSliderForward = function (fromAutoPlay) {
       this.play();
     }
   }
-}
+};
 
 Slider.prototype.updateUI = function () {
   this.setActiveSlide();
@@ -99,11 +99,11 @@ Slider.prototype.updateUI = function () {
     else
       this.nextMoverButton.classList.remove('disabled');
   }
-  else{
+  else {
     this.prevMoverButton.classList.remove('disabled');
     this.nextMoverButton.classList.remove('disabled');
   }
-}
+};
 
 Slider.prototype.setActiveSlide = function () {
   const slideWidth = 100;
@@ -120,7 +120,7 @@ Slider.prototype.setActiveSlide = function () {
 
   // document.querySelector(".quote-marker.active").classList.remove('active');
   // quoteMarkers[this.currentIndex].classList.add('active');
-}
+};
 
 
 Slider.prototype.addMovers = function () {
@@ -149,7 +149,7 @@ Slider.prototype.addMovers = function () {
     this.prevMoverButton.classList.add("disabled");
 
   this.wrapper.appendChild(movers);
-}
+};
 
 Slider.prototype.play = function (duration) {
   if(duration)
@@ -162,6 +162,6 @@ Slider.prototype.play = function (duration) {
   this.slideshowTimer = setInterval(() => {
     this.scrollSliderForward(true);
   }, duration);
-}
+};
 
 export default Slider;
