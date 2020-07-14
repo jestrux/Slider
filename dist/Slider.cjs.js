@@ -4,9 +4,10 @@ function Slider(containerId, options) {
   const defaultOptions = {
     cycle: false,
     hideActions: false,
+    showMarkers: false,
     showActionsOnHover: false,
     slideDuration: 2000,
-    onChange: null
+    onChange: null,
   };
   
   this.options = {
@@ -20,16 +21,17 @@ function Slider(containerId, options) {
   this.SlideItems = this.wrapper.querySelectorAll(".SlideItem");
   this.SlideItems[0].classList.add("current");
   this.ActiveSlide = this.SlideItems[0];
-
-  // this.quoteMarkers = this.wrapper.querySelectorAll(".quote-marker");
+  this.currentIndex = 0;
+  this.markers = [];
 
   if(this.options.showActionsOnHover)
     this.wrapper.classList.add("show-actions-on-hover");
 
-  this.currentIndex = 0;
-
   if(!this.options.hideActions)
     this.addMovers();
+
+  if(this.options.showMarkers)
+    this.addMarkers();
 
   return this;
 }
@@ -84,8 +86,30 @@ Slider.prototype.scrollSliderForward = function (fromAutoPlay) {
   }
 };
 
+Slider.prototype.scrollSliderTo = function (index) {
+  if(index < 0 || index >= this.SlideItems.length)
+    return;
+
+  this.currentIndex = index;
+    
+  this.updateUI();
+
+  if(this.slideshowTimer){
+    clearInterval(this.slideshowTimer);
+    this.play();
+  }
+};
+
 Slider.prototype.updateUI = function () {
   this.setActiveSlide();
+
+  if(this.markers.length){
+    const activeMarker = this.markers.find((marker => marker.classList.contains("active")));
+    if(activeMarker)
+      activeMarker.classList.remove("active");
+
+    this.markers[this.currentIndex].classList.add("active");
+  }
 
   if(this.options.hideActions)
     return;
@@ -119,9 +143,6 @@ Slider.prototype.setActiveSlide = function () {
     const newPercent = this.currentIndex * 100 / (this.SlideItems.length - 1);
     this.options.onChange(this.currentIndex, newPercent);
   }
-
-  // document.querySelector(".quote-marker.active").classList.remove('active');
-  // quoteMarkers[this.currentIndex].classList.add('active');
 };
 
 
@@ -151,6 +172,24 @@ Slider.prototype.addMovers = function () {
     this.prevMoverButton.classList.add("disabled");
 
   this.wrapper.appendChild(movers);
+};
+
+Slider.prototype.addMarkers = function () {
+  const markers = document.createElement("div");
+  markers.classList.add("SlideMarkers");
+
+  this.SlideItems.forEach((_, index) => {
+    const marker = document.createElement("button");
+    marker.onclick = () => this.scrollSliderTo(index);
+
+    if(index === this.currentIndex) 
+      marker.classList.add("active");
+
+    markers.appendChild(marker);
+    this.markers.push(marker);
+  });
+
+  this.wrapper.appendChild(markers);
 };
 
 Slider.prototype.play = function (duration) {

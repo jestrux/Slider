@@ -57,6 +57,7 @@
     var defaultOptions = {
       cycle: false,
       hideActions: false,
+      showMarkers: false,
       showActionsOnHover: false,
       slideDuration: 2000,
       onChange: null
@@ -67,11 +68,12 @@
     this.Scroller = this.wrapper.querySelector(".SlideScroller");
     this.SlideItems = this.wrapper.querySelectorAll(".SlideItem");
     this.SlideItems[0].classList.add("current");
-    this.ActiveSlide = this.SlideItems[0]; // this.quoteMarkers = this.wrapper.querySelectorAll(".quote-marker");
-
-    if (this.options.showActionsOnHover) this.wrapper.classList.add("show-actions-on-hover");
+    this.ActiveSlide = this.SlideItems[0];
     this.currentIndex = 0;
+    this.markers = [];
+    if (this.options.showActionsOnHover) this.wrapper.classList.add("show-actions-on-hover");
     if (!this.options.hideActions) this.addMovers();
+    if (this.options.showMarkers) this.addMarkers();
     return this;
   }
 
@@ -109,8 +111,28 @@
     }
   };
 
+  Slider.prototype.scrollSliderTo = function (index) {
+    if (index < 0 || index >= this.SlideItems.length) return;
+    this.currentIndex = index;
+    this.updateUI();
+
+    if (this.slideshowTimer) {
+      clearInterval(this.slideshowTimer);
+      this.play();
+    }
+  };
+
   Slider.prototype.updateUI = function () {
     this.setActiveSlide();
+
+    if (this.markers.length) {
+      var activeMarker = this.markers.find(function (marker) {
+        return marker.classList.contains("active");
+      });
+      if (activeMarker) activeMarker.classList.remove("active");
+      this.markers[this.currentIndex].classList.add("active");
+    }
+
     if (this.options.hideActions) return;
 
     if (!this.options.cycle) {
@@ -133,9 +155,7 @@
     if (typeof this.options.onChange === 'function') {
       var newPercent = this.currentIndex * 100 / (this.SlideItems.length - 1);
       this.options.onChange(this.currentIndex, newPercent);
-    } // document.querySelector(".quote-marker.active").classList.remove('active');
-    // quoteMarkers[this.currentIndex].classList.add('active');
-
+    }
   };
 
   Slider.prototype.addMovers = function () {
@@ -150,13 +170,33 @@
     this.wrapper.appendChild(movers);
   };
 
-  Slider.prototype.play = function (duration) {
+  Slider.prototype.addMarkers = function () {
     var _this = this;
+
+    var markers = document.createElement("div");
+    markers.classList.add("SlideMarkers");
+    this.SlideItems.forEach(function (_, index) {
+      var marker = document.createElement("button");
+
+      marker.onclick = function () {
+        return _this.scrollSliderTo(index);
+      };
+
+      if (index === _this.currentIndex) marker.classList.add("active");
+      markers.appendChild(marker);
+
+      _this.markers.push(marker);
+    });
+    this.wrapper.appendChild(markers);
+  };
+
+  Slider.prototype.play = function (duration) {
+    var _this2 = this;
 
     if (duration) this.options.slideDuration = duration;else duration = this.options.slideDuration;
     this.options.cycle = true;
     this.slideshowTimer = setInterval(function () {
-      _this.scrollSliderForward(true);
+      _this2.scrollSliderForward(true);
     }, duration);
   };
 
