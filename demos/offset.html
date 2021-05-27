@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider with offset</title>
+
+    <link rel="stylesheet" href="../dist/Slider.css" />
+    <style>
+        img{
+            object-fit: cover;
+            height: 400px;
+            /* make images take 75% width to leave space for overlay */
+            width: 74%;
+        }
+
+        /* 
+            Override default library behavior of hiding 
+            slides that are not current 
+        */
+        #gallery .Slider .SlideItem:not(.current){
+            opacity: 1;
+        }
+
+        /* 
+            Pull back the slide next to the current so that it 
+            shows on top of current slide in the space left by 75% wide image 
+        */
+        .gallery-item.current + .gallery-item{
+            margin-left: -22%;
+        }
+
+        /* Move slide movers below the slideshow */
+        #gallery .SlideMovers{
+            position: relative;
+            left: 0;
+            right: 0;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        #gallery .SlideMovers button{
+            border: 1px solid #ddd;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gallery" style="width: 900px; margin: 4rem auto;">
+        <div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621570072081-b780ce69bff0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwxfDF8YWxsfDZ8fHx8fHwyfHwxNjIyMDU0NzY3&ixlib=rb-1.2.1&q=80&w=800" alt="" />
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621873495914-1c921811e37b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8YWxsfDEzfHx8fHx8Mnx8MTYyMjA1NDc2Nw&ixlib=rb-1.2.1&q=80&w=1080" alt="" />
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1622032494057-3bdc6f355e4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8YWxsfDE4fHx8fHx8Mnx8MTYyMjA1NDc2Nw&ixlib=rb-1.2.1&q=80&w=1080" alt="" />
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621971231299-d2b69f9b3fec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8YWxsfDI3fHx8fHx8Mnx8MTYyMjA1NDc2Nw&ixlib=rb-1.2.1&q=80&w=1080" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/Slider.umd.js"></script>
+    <script>
+        new Slider("#gallery > div");
+    </script>
+</body>
+</html>

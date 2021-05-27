@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Slider</title>
+
+    <link rel="stylesheet" href="../dist/Slider.css" />
+    <style>
+        img {
+            object-fit: cover;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 700px; margin: 4rem auto;">
+        <div id="slideshow">
+            <img src="https://images.unsplash.com/photo-1456428199391-a3b1cb5e93ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8c2VhcmNofDEyfHxtb3VudGFpbnN8ZW58MHx8fHwxNjIyMTE2MzYz&ixlib=rb-1.2.1&q=80&w=800"
+                alt="" />
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8c2VhcmNofDN8fG1vdW50YWluc3xlbnwwfHx8fDE2MjIxMTYzNjM&ixlib=rb-1.2.1&q=80&w=800"
+                alt="" />
+            <img src="https://images.unsplash.com/photo-1622032494057-3bdc6f355e4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8YWxsfDE4fHx8fHx8Mnx8MTYyMjA1NDc2Nw&ixlib=rb-1.2.1&q=80&w=800"
+                alt="" />
+            <img src="https://images.unsplash.com/photo-1434394354979-a235cd36269d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjE2NXwwfDF8c2VhcmNofDEwfHxtb3VudGFpbnN8ZW58MHx8fHwxNjIyMTE2MzYz&ixlib=rb-1.2.1&q=80&w=800"
+                alt="" />
+        </div>
+    </div>
+
+    <script src="../dist/Slider.umd.js"></script>
+    <script>
+        const slideshow = new Slider("#slideshow");
+        // Uncomment the line below to rotate slideshow with a duration of two seconds
+        slideshow.play(2000);
+    </script>
+</body>
+
+</html>
