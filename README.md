@@ -11,7 +11,7 @@ const slider = new Slider("#slideshowContainer");
 slider.play();
 ```
 
-See sample code [here](demo/index.html)
+See sample code [here](demos/basic.html)
 
 ## Developer environment requirements
 
